@@ -1,6 +1,6 @@
 import React from "react";
 
-const ChatPage = () => {
+const JobsPage = () => {
 	return (
 		<div className="flex p-8 flex-col bg-neutral-100 h-full shadow-md">
 			{/* Example Content */}
@@ -20,9 +20,7 @@ const ChatPage = () => {
 							Skills: React, Node, Express
 						</p>
 						<p className="text-sm text-gray-600">Salary: $50,000</p>
-						<button className="btn mt-4 btn-primary">
-							Details
-						</button>
+						<button className="btn mt-4 btn-primary">Details</button>
 					</div>
 
 					{/* Job Card 2 */}
@@ -36,9 +34,7 @@ const ChatPage = () => {
 						</p>
 						<p className="text-sm text-gray-600">Salary: $60,000</p>
 
-						<button className="btn mt-4 btn-primary">
-							Details
-						</button>
+						<button className="btn mt-4 btn-primary">Details</button>
 					</div>
 
 					{/* Job Card 3 */}
@@ -52,9 +48,7 @@ const ChatPage = () => {
 						</p>
 						<p className="text-sm text-gray-600">Salary: $70,000</p>
 
-						<button className="btn mt-4 btn-primary">
-							Details
-						</button>
+						<button className="btn mt-4 btn-primary">Details</button>
 					</div>
 
 					{/* Job Card 4 */}
@@ -68,9 +62,7 @@ const ChatPage = () => {
 						</p>
 						<p className="text-sm text-gray-600">Salary: $90,000</p>
 
-						<button className="btn mt-4 btn-primary">
-							Details
-						</button>
+						<button className="btn mt-4 btn-primary">Details</button>
 					</div>
 
 					{/* Job Card 5 */}
@@ -84,9 +76,7 @@ const ChatPage = () => {
 						</p>
 						<p className="text-sm text-gray-600">Salary: $65,000</p>
 
-						<button className="btn mt-4 btn-primary">
-							Details
-						</button>
+						<button className="btn mt-4 btn-primary">Details</button>
 					</div>
 
 					{/* You can continue adding more job cards */}
@@ -96,4 +86,4 @@ const ChatPage = () => {
 	);
 };
 
-export default ChatPage;
+export default JobsPage;

@@ -9,6 +9,7 @@ import morgan from "morgan";
 import userRoutes from "./routes/user.js";
 import resumeRoutes from "./routes/resume.js";
 import companyRoutes from "./routes/company.js";
+import jobRoutes from "./routes/job.js";
 
 //* CONFIGURATIONS
 const app = express();
@@ -41,3 +42,7 @@ app.get("/", (req, res) => {
 app.use("/user", userRoutes);
 app.use("/resume", resumeRoutes);
 app.use("/company", companyRoutes);
+app.use("/job", jobRoutes)
+
+
+
