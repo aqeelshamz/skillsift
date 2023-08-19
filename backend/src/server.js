@@ -8,6 +8,7 @@ import morgan from "morgan";
 //* ROUTES
 import userRoutes from "./routes/user.js";
 import resumeRoutes from "./routes/resume.js";
+import companyRoutes from "./routes/company.js";
 
 //* CONFIGURATIONS
 const app = express();
@@ -18,22 +19,19 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(express.json());
 app.use(morgan("dev"));
 
-//* ROUTE CONFIGURATION
-app.use("/users", userRoutes);
-app.use("/resume", resumeRoutes);
 
 //* MONGOOSE CONFIGURATION
 mongoose.set("strictQuery", true);
 const PORT = 6001;
 mongoose
-  .connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
-  })
-  .catch((error) => console.log(`${error} did not connect`));
+.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+})
+.catch((error) => console.log(`${error} did not connect`));
 
 app.get("/", (req, res) => {
   res.send("Hello world!");
@@ -42,3 +40,5 @@ app.get("/", (req, res) => {
 
 //* ROUTES
 app.use("/user", userRoutes);
+app.use("/resume", resumeRoutes);
+app.use("/company", companyRoutes);

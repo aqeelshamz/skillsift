@@ -17,6 +17,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    type: {
+      type: Number,
+      required: true,
+      enum: [0, 1], //? 0: user, 1: Company
+    },
   }, { timestamps: true });
   
   const User = mongoose.model('User', userSchema);

@@ -2,26 +2,12 @@ import mongoose from "mongoose";
 
 const companySchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-      unique: true,
-      select: false,
-    },
-    phone: {
-        type: String,
-        required: true,
-        unique: true,
-        select: false,
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        select: false,
-    },
+    industry: { type: String, required: true },
+    employeeCount: { type: Number, required: true },
+    website: { type: String, required: true },
+    User: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
-  { timestamps: true }
+  { timestamps: true } 
 );
 
 const Company = mongoose.model("Company", companySchema);
