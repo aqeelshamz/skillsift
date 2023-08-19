@@ -24,13 +24,8 @@ export default function CompanyLayout({
           </div>
         </div>
         <div className="flex flex-col justify-between bg-neutral-100 h-4/5 rounded-lg">
-<<<<<<< HEAD
-          <div className="flex flex-col space-y-2 sticky">
-            <Link href="/company/dashboard" className="flex flex-col">
-=======
           <div className="flex flex-col space-y-2">
             <Link href="/company/" className="flex flex-col">
->>>>>>> 9e1c06abf25d89b6afb846c0968afddadd2d7561
               <button className="btn text-lg justify-start normal-case font-medium">
                 <BiHomeAlt className="inline-block" />
                 Dashboard

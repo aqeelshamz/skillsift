@@ -1,6 +1,6 @@
 import React from "react";
 
-const ChatPage = () => {
+const ApplicationsPage = () => {
 	return (
 		<div className="flex p-8 flex-col bg-neutral-100 h-full shadow-md">
 			{/* Example Content */}
@@ -8,7 +8,7 @@ const ChatPage = () => {
 			{/* Table */}
 			<div className="mt-8 bg-white p-6 rounded-lg shadow-md">
 				{/* Recommended Jobs */}
-				<h4 className="text-3xl font-bold">Recommended Jobs</h4>
+				<h4 className="text-3xl font-bold">Applications</h4>
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 					{/* Job Card 1 */}
 					<div className="bg-white p-6 rounded-lg shadow-md">
@@ -20,6 +20,7 @@ const ChatPage = () => {
 							Skills: React, Node, Express
 						</p>
 						<p className="text-sm text-gray-600">Salary: $50,000</p>
+						<p className="text-sm text-gray-600">STATUS: Pending</p>
 						<button className="btn mt-4 btn-primary">
 							Details
 						</button>
@@ -36,6 +37,7 @@ const ChatPage = () => {
 						</p>
 						<p className="text-sm text-gray-600">Salary: $60,000</p>
 
+						<p className="text-sm text-gray-600">STATUS: Pending</p>
 						<button className="btn mt-4 btn-primary">
 							Details
 						</button>
@@ -52,6 +54,7 @@ const ChatPage = () => {
 						</p>
 						<p className="text-sm text-gray-600">Salary: $70,000</p>
 
+						<p className="text-sm text-gray-600">STATUS: Pending</p>
 						<button className="btn mt-4 btn-primary">
 							Details
 						</button>
@@ -68,6 +71,7 @@ const ChatPage = () => {
 						</p>
 						<p className="text-sm text-gray-600">Salary: $90,000</p>
 
+						<p className="text-sm text-gray-600">STATUS: Pending</p>
 						<button className="btn mt-4 btn-primary">
 							Details
 						</button>
@@ -84,6 +88,7 @@ const ChatPage = () => {
 						</p>
 						<p className="text-sm text-gray-600">Salary: $65,000</p>
 
+						<p className="text-sm text-gray-600">STATUS: Pending</p>
 						<button className="btn mt-4 btn-primary">
 							Details
 						</button>
@@ -96,4 +101,4 @@ const ChatPage = () => {
 	);
 };
 
-export default ChatPage;
+export default ApplicationsPage;
