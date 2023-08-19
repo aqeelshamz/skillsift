@@ -1,3 +1,4 @@
+import { required } from "joi";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
@@ -6,12 +7,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      select: false
+      select: false,
     },
     password: {
       type: String,
       required: true,
-      select: false
+      select: false,
     },
     name: {
       type: String,
@@ -22,8 +23,15 @@ const userSchema = new mongoose.Schema(
       required: true,
       enum: [0, 1], //? 0: user, 1: Company
     },
-  }, { timestamps: true });
-  
-  const User = mongoose.model('User', userSchema);
-  
-  export default User;
+    appliedJobs: {
+      type: [mongoose.Schema.Types.ObjectId], //? Array of job ids
+      ref: "Job",
+      default: [],
+    },
+  },
+  { timestamps: true }
+);
+
+const User = mongoose.model("User", userSchema);
+
+export default User;
