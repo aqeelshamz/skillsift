@@ -12,7 +12,7 @@ export default function Page() {
     const uploadResume = (e: any) => {
         setUploading(true);
         const data = new FormData();
-        data.append("resume", e.target.files[0]);
+        data.append("file", e.target.files[0]);
 
         const axiosInstance = axios.create({
             baseURL: `${serverURL}`,
