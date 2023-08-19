@@ -1,0 +1,3 @@
+const resumeInfoExtractionPrompt = ``;
+
+export { resumeInfoExtractionPrompt };

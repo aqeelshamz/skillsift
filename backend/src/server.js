@@ -5,6 +5,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
 
+//* ROUTES
+import userRoutes from "./routes/usersx.js";
+
 //* CONFIGURATIONS
 const app = express();
 dotenv.config();
@@ -13,6 +16,9 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(express.json());
 app.use(morgan("dev"));
+
+//* ROUTE CONFIGURATION
+app.use("/users", userRoutes);
 
 //* MONGOOSE CONFIGURATION
 mongoose.set("strictQuery", true);
