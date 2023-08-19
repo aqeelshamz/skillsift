@@ -6,7 +6,7 @@ import Homepage from "./components/Homepage";
 export default function Home() {
   return (
     <>
-    <Homepage/>
+    
     <div className="flex w-screen h-screen flex-col text-black p-5">
       <nav className="flex justify-between">
         <p className="text-2xl font-bold">SkillSift</p>
@@ -51,3 +51,4 @@ export default function Home() {
     </div></>
   );
 }
+
