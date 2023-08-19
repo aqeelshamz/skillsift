@@ -4,10 +4,10 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
-import userRoutes from "./routes/User.js";
 
 //* ROUTES
-import userRoutes from "./routes/usersx.js";
+import userRoutes from "./routes/user.js";
+import resumeRoutes from "./routes/resume.js";
 
 //* CONFIGURATIONS
 const app = express();
@@ -20,6 +20,7 @@ app.use(morgan("dev"));
 
 //* ROUTE CONFIGURATION
 app.use("/users", userRoutes);
+app.use("/resume", resumeRoutes);
 
 //* MONGOOSE CONFIGURATION
 mongoose.set("strictQuery", true);

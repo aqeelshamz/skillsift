@@ -3,7 +3,7 @@ import joi from "joi";
 import { Configuration, OpenAIApi } from "openai";
 const router = express.Router();
 
-router.post("/extract-resume-data", async (req, res) => {
+router.post("/extract-data", async (req, res) => {
     const schema = joi.object({
         resumeText: joi.string().required(),
     });
