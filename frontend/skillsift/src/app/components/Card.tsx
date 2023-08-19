@@ -31,11 +31,13 @@ function Card(props: any) {
 						</div>
 					</div>
 					<div className="flex justify-center items-center">
-						<Image
+						{/* <Image
 							className=" mb-3 w-14 h-14 rounded-full shadow-lg mx-auto"
 							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTByhd8Mht5FcIRvFFNMJWI_7SUT9cTzWfaQIZLkmVkAKzmutywBXiqFWoQb8lHi0L7yfk&usqp=CAU"
 							alt="product designer"
-						/>
+              width={100}
+              height={100}
+						/> */}
 					</div>
 				</div>
 

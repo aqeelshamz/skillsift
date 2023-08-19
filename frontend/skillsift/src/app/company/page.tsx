@@ -1,48 +1,32 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 
 const DashboardPage = () => {
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			if (!localStorage.getItem("token")) {
+				window.location.href = "/landing";
+			}
+		}
+	}, [])
+
 	return (
-		<div className="flex p-8 flex-col bg-neutral-100 h-full shadow-md">
+		<div className="flex p-8 flex-col h-full">
 			{/* Example Content */}
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-				{/* Job Applications */}
-				<div className="bg-white p-6 rounded-lg shadow-md">
-					<h2 className="text-xl font-semibold mb-2">
-						Job Applications
-					</h2>
-					<p className="text-gray-600">
-						You have 5 pending applications.
-					</p>
-					<p className="text-sm text-gray-600">
-						View and manage your applications.
-					</p>
+				<div className="stats shadow">
+					<div className="stat">
+						<div className="stat-title">Total Jobs</div>
+						<div className="stat-value">14</div>
+					</div>
 				</div>
 
-				{/* Profile */}
-				<div className="bg-white p-6 rounded-lg shadow-md">
-					<h2 className="text-xl font-semibold mb-2">Your Profile</h2>
-					<p className="text-gray-600">
-						Complete your profile to stand out to employers.
-					</p>
-					<p className="text-sm text-gray-600">
-						Update your skills and experience.
-					</p>
+				<div className="stats shadow">
+					<div className="stat">
+						<div className="stat-title">Total Applications Recieved</div>
+						<div className="stat-value">226</div>
+					</div>
 				</div>
-
-				{/* Notifications */}
-				<div className="bg-white p-6 rounded-lg shadow-md">
-					<h2 className="text-xl font-semibold mb-2">
-						Notifications
-					</h2>
-					<p className="text-gray-600">
-						You have 3 new notifications.
-					</p>
-					<p className="text-sm text-gray-600">
-						Stay updated on your applications.
-					</p>
-				</div>
-
-				{/* You can add more user-specific cards */}
 			</div>
 
 			{/* Table */}

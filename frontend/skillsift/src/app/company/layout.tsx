@@ -1,66 +1,50 @@
-import { BiHomeAlt } from "react-icons/bi";
-import { BiBriefcaseAlt2 } from "react-icons/bi";
-import { BiChat } from "react-icons/bi";
-import { GrDocumentText } from "react-icons/gr";
-import { FiLogOut } from "react-icons/fi";
+"use client";
+import { FiBriefcase, FiFileText, FiHome, FiLogOut, FiMessageCircle, FiMoreHorizontal, FiSettings, FiUser } from "react-icons/fi";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React from "react";
 
 export default function CompanyLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathName = usePathname();
+
   return (
-    <div className="flex flex-row ">
-      <div className="w-1/5 bg-sky-950 p-4 h-screen flex-col space-y-3">
-        <div className="flex flex-col bg-neutral-100 h-auto rounded-lg">
-          <div tabIndex={0} className="collapse bg-base-200 collapse-arrow">
-            <div className="collapse-title text-xl font-medium">Google</div>
-            <div className="collapse-content">
-              <p>
-                <a href="#">Analytics</a>
-              </p>
-            </div>
-          </div>
+    <div className="flex flex-row h-full">
+      <div className={'flex flex-col p-5 min-w-[300px] max-w-[20vw] h-full rounded-md max-sm:fixed max-sm:w-full max-sm:h-full max-sm:max-w-none bg-base-100 max-sm:z-50 '}>
+        <div className="flex items-center mb-4">
+          <p className="text-xl font-bold">💼 SkillSift</p><label className="ml-2 cursor-pointer badge badge-primary badge-outline">ORGANIZATIONS</label>
         </div>
-        <div className="flex flex-col justify-between bg-neutral-100 h-4/5 rounded-lg">
-<<<<<<< HEAD
-          <div className="flex flex-col space-y-2 sticky">
-            <Link href="/company/dashboard" className="flex flex-col">
-=======
-          <div className="flex flex-col space-y-2">
-            <Link href="/company/" className="flex flex-col">
->>>>>>> 9e1c06abf25d89b6afb846c0968afddadd2d7561
-              <button className="btn text-lg justify-start normal-case font-medium">
-                <BiHomeAlt className="inline-block" />
-                Dashboard
-              </button>
-            </Link>
-            <Link href="/company/jobs" className="flex flex-col">
-              <button className="btn  text-lg justify-start normal-case font-medium">
-                <BiBriefcaseAlt2 className="inline-block" />
-                Jobs
-              </button>
-            </Link>
-            <Link href="/company/applications" className="flex flex-col">
-              <button className="btn text-lg justify-start normal-case font-medium">
-                <GrDocumentText className="inline-block" />
-                Applications
-              </button>
-            </Link>
-            <Link href="/company/chats" className="flex flex-col">
-              <button className="btn text-lg justify-start normal-case font-medium">
-                <BiChat className="inline-block" />
-                Chat
-              </button>
-            </Link>
+        <div className='p-0 my-2 h-full w-full overflow-hidden hover:overflow-y-auto'>
+          <Link href={"/company"}><button className={(pathName === "/company" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiHome /> Dashboard</button></Link>
+          <Link href={"/company/jobs"}><button className={(pathName === "/company/jobs" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiBriefcase /> Jobs</button></Link>
+          <Link href={"/company/applications"}><button className={(pathName === "/company/applications" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiFileText /> Applications</button></Link>
+          <Link href={"/company/chats"}><button className={(pathName === "/company/chats" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiMessageCircle /> Chats</button></Link>
+          <Link href={"/company/profile"}><button className={(pathName === "/company/profile" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiUser /> Profile</button></Link>
+        </div>
+        <hr />
+        <div tabIndex={0} className='cursor-pointer dropdown dropdown-top flex items-center mt-2 hover:bg-base-200 p-2 rounded-lg'>
+          <div className='flex items-center justify-between w-full'>
+            <div className='flex items-center'>
+              <div className="avatar placeholder mr-2">
+                <div className="bg-blue-700 text-white mask mask-squircle w-10">
+                  <span><FiUser /></span>
+                </div>
+              </div>
+              <p className='font-semibold'>Sample User</p>
+            </div>
+            <FiMoreHorizontal />
           </div>
-          <div className="flex flex-col" >
-            <button className="btn text-lg justify-start normal-case font-medium">
-              <FiLogOut className="inline-block" />
-              Logout
-            </button>
-          </div>
+          <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mb-2">
+            <label htmlFor='settings_modal'><li className='flex'><p><FiSettings />Settings</p></li></label>
+            <hr className='my-2' />
+            <li className='flex' onClick={() => {
+              localStorage.clear()
+              window.location.href = "/landing";
+            }}><p><FiLogOut className="text-red-600" />Logout</p></li>
+          </ul>
         </div>
       </div>
       <div className="w-full">{children}</div>
