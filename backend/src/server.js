@@ -19,7 +19,6 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(express.json());
 app.use(morgan("dev"));
 
-
 //* MONGOOSE CONFIGURATION
 mongoose.set("strictQuery", true);
 const PORT = 6001;

@@ -4,8 +4,26 @@ import OpenAI from "openai";
 import { resumeInfoExtractionPrompt } from "../utils/util.js";
 import validate from "../utils/userValidate.js"
 const router = express.Router();
+import multer from 'multer';
 
+const resumeStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "public");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "-" + file.originalname);
+    },
+});
+const resumeUpload = multer({
+    storage: resumeStorage,
+    fileFilter(req, file, cb) {
+        cb(undefined, true);
+    },
+});
 
+router.post("/upload", resumeUpload.single('resume'), validate, async (req, res) => {
+    return res.send(req.file.filename);
+});
 
 router.post("/extract-data", validate, async (req, res) => {
     const schema = joi.object({
