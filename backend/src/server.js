@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
+import userRoutes from "./routes/User.js";
 
 //* ROUTES
 import userRoutes from "./routes/usersx.js";
@@ -34,5 +35,9 @@ mongoose
   .catch((error) => console.log(`${error} did not connect`));
 
 app.get("/", (req, res) => {
-  res.send("SkillSift");
+  res.send("Hello world!");
 });
+
+
+//* ROUTES
+app.use("/user", userRoutes);
