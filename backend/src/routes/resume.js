@@ -2,9 +2,12 @@ import express from "express";
 import joi from "joi";
 import OpenAI from "openai";
 import { resumeInfoExtractionPrompt } from "../utils/util.js";
+import validate from "../utils/userValidate.js"
 const router = express.Router();
 
-router.post("/extract-data", async (req, res) => {
+
+
+router.post("/extract-data", validate, async (req, res) => {
     const schema = joi.object({
         resumeText: joi.string().required(),
     });
