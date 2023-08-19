@@ -5,13 +5,14 @@ import { resumeInfoExtractionPrompt } from "../utils/util.js";
 import validate from "../utils/userValidate.js"
 const router = express.Router();
 import multer from 'multer';
+import Resume from "../models/resumeModel.js";
 
 const resumeStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "public");
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + "-" + file.originalname);
+        cb(null, Date.now() + "." + file.originalname.split(".")[1]);
     },
 });
 const resumeUpload = multer({
@@ -21,8 +22,13 @@ const resumeUpload = multer({
     },
 });
 
-router.post("/upload", resumeUpload.single('resume'), validate, async (req, res) => {
-    return res.send(req.file.filename);
+router.post("/upload", resumeUpload.single("file"), validate, async (req, res) => {
+    const newResume = new Resume({
+        userId: req.body.userId,
+        fileName: req.file.filename,
+    });
+
+    return res.send(req.file.filename ?? "");
 });
 
 router.post("/extract-data", validate, async (req, res) => {
