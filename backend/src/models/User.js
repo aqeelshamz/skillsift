@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
 	college: { type: String, required: true },
 	specialization: { type: String, required: true },
 	year: { type: String, required: true },
+	password: { type: String, required: true },
 });
 
 export default mongoose.model("User", UserSchema);

@@ -28,5 +28,5 @@ mongoose
   .catch((error) => console.log(`${error} did not connect`));
 
 app.get("/", (req, res) => {
-  res.send("Hello world!");
+  res.send("SkillSift");
 });
