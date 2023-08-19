@@ -2,5 +2,5 @@
 import { redirect } from "next/navigation";
 
 export default function Main() {
-  redirect(localStorage.getItem("token") ? `/home` : `/landing`);
+	redirect(localStorage.getItem("token") ? `/home` : `/landing`);
 }

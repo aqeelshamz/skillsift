@@ -81,8 +81,8 @@ export default function Landing() {
           </div>
         </nav>
         <main className="w-full h-full flex justify-center items-center flex-col">
-          <p className="text-4xl">Lorem ipsum dolor sit amet.</p>
-          <p className="text-lg mt-4">Lorem ipsum dolor sit amet lorem ipsum dolor sit amet. This is an example of description text.</p>
+          <p className="text-4xl">Final stop on job search.</p>
+          <p className="text-lg mt-4">Upload your resume and get job recommendations based on your skills. We'll send job applications on behalf of you.</p>
           <label htmlFor="createaccount_modal" className="btn btn-primary mt-10">Get Started</label>
         </main>
         {/* Create Account Modal */}
