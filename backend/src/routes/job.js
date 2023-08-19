@@ -1,31 +1,4 @@
 import express from "express";
-<<<<<<< HEAD
-import jobModel from "../models/jobModel.js";
-
-const router = express.Router();
-
-router.get("/getJob", async (req, res) => {
-	const jobs = await jobModel.find({});
-
-	return res.send(jobs);
-});
-
-router.post("/addJob", async (req, res) => {
-	const { title, description, company, skills, salary } = req.body;
-
-	const newJob = new jobModel({
-		title,
-		description,
-		company,
-		skills,
-		salary,
-	});
-
-	await newJob.save();
-
-	return res.send(newJob);
-});
-=======
 import Job from "./models/Job"; // Import your Job model
 import validate from "../utils/userValidate.js";
 import User from "../models/userModel";
@@ -121,4 +94,3 @@ router.get("/jobs", async (req, res) => {
 // You can add more routes such as updating and deleting jobs
 
 export default router;
->>>>>>> 48a987260d3c902687e8143bf321d1fa8ba5d8fd
