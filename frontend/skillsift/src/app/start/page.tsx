@@ -183,8 +183,8 @@ export default function Page() {
                             <span className="label-text">Skills</span>
                         </label>
                         {
-                            resumeData["skills"].map((item: any) => {
-                                return <label className="hover:bg-slate-200 badge badge-outline p-4 mr-2 mb-2">{item} <FiX className="ml-2 cursor-pointer" onClick={() => {
+                            resumeData["skills"].map((item: any, index: number) => {
+                                return <label key={index} className="hover:bg-slate-200 badge badge-outline p-4 mr-2 mb-2">{item} <FiX className="ml-2 cursor-pointer" onClick={() => {
                                     setResumeData({
                                         ...resumeData,
                                         skills: resumeData["skills"].filter((skill: any) => skill !== item)
