@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
+import userRoutes from "./routes/User.js";
 
 //* CONFIGURATIONS
 const app = express();
@@ -30,3 +31,7 @@ mongoose
 app.get("/", (req, res) => {
   res.send("Hello world!");
 });
+
+
+//* ROUTES
+app.use("/user", userRoutes);
