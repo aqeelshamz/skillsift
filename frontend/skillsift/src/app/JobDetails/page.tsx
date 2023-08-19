@@ -44,7 +44,6 @@ export default function Page() {
           <div className="hidden md:block">
           <div className=" md:text-3xl text-xl  font-semibold p-3 md:px-5 md:flex sm:items-center mt-10 mb-20">
             <div className="flex">
-              {" "}
               <BsCashStack className="opacity-60 mr-1" size={30} />{" "}
               <span className="opacity-60">Salary : </span>{" "}
               <span className="opacity-90"> ₹200000</span>

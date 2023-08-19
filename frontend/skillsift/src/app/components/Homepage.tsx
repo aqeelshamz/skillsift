@@ -1,35 +1,40 @@
 import Image from "next/image";
 import Card from "./Card";
+import Link from "next/link";
 
 function Homepage() {
   return (
-<div className="w-full h-full overflow-auto">
+    <div className="w-full h-full overflow-auto">
 
-    <div className="  bg-gray-200"> 
-    <p className="text-2xl sm:text-5xl font-extrabold p-6">Recent jobs</p>
+      <div>
+        <p className="text-2xl sm:text-3xl font-extrabold p-6">Recent jobs</p>
 
-    <div className="flex space-x- md:px-8    items-center gap-3     flex-wrap justify-start   px-3 py-1">
-    <Card/><Card/><Card/>
-    <Card/>
-    </div>
+        <div className="flex space-x- md:px-8    items-center gap-3     flex-wrap justify-start   px-3 py-1">
+          {
+            [...Array(3)].map((item) => {
+              return <Link href="/JobDetails"><Card /></Link>
+            })
+          }
+        </div>
 
-</div>
+      </div>
 
-      <div className="  bg-gray-200">
+      <div>
         <p className="text-2xl sm:text-5xl font-extrabold p-6">Recommended jobs</p>
 
         <div className="flex space-x- md:px-8    items-center gap-3     flex-wrap justify-start   px-3 py-1">
-        <Card/><Card/><Card/>
-        <Card/><Card/>
+          {[...Array(5)].map((item) => {
+            return <Link href="/JobDetails"><Card /></Link>
+          })}
         </div>
-   
-   </div>
+
+      </div>
 
 
-   </div>
-    
+    </div>
 
-  
+
+
 
 
   )
