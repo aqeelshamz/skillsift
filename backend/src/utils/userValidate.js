@@ -1,17 +1,23 @@
 import jwt from 'jsonwebtoken';
+import User from '../models/userModel.js';
 
-//validate jsonwebtoken for requests 
+const validate = async (req, res, next) => {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
 
-export default function (req, res, next) {
-    const token = req.header('auth-token');
-    
-    if (!token) return res.status(401).send('Access Denied');
+    if (token == null) return res.status(401).send("Unauthorized");
 
-    try {
-        const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-        req.user = verified;
+    jwt.verify(token, process.env.TOKEN_SECRET, async (err, user) => {
+        console.log(user)
+        if (err) return res.status(401).send("Unauthorized");
+        const userData = await User.findOne({ _id: user.id }).lean();
+        if (!userData) {
+            return res.status(401).send("Unauthorized");
+        }
+
+        req.user = userData;
         next();
-    } catch (err) {
-        res.status(400).send('Invalid Token');
-    }
-}
+    });
+};
+
+export default validate;

@@ -5,15 +5,18 @@ import { resumeInfoExtractionPrompt } from "../utils/util.js";
 import validate from "../utils/userValidate.js"
 const router = express.Router();
 import multer from 'multer';
+import Resume from "../models/resumeModel.js";
+import { readPdfText } from 'pdf-text-reader';
 
 const resumeStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "public");
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + "-" + file.originalname);
+        cb(null, Date.now() + "." + file.originalname.split(".")[1]);
     },
 });
+
 const resumeUpload = multer({
     storage: resumeStorage,
     fileFilter(req, file, cb) {
@@ -21,33 +24,42 @@ const resumeUpload = multer({
     },
 });
 
-router.post("/upload", resumeUpload.single('resume'), validate, async (req, res) => {
-    return res.send(req.file.filename);
-});
+const extractResumeData = async (fileName) => {
+    const pages = await readPdfText('public/' + fileName);
+    console.log(pages);
 
-router.post("/extract-data", validate, async (req, res) => {
-    const schema = joi.object({
-        resumeText: joi.string().required(),
+    var text = [];
+    for (const page of pages) {
+        text.push(page.lines.join("\n"));
+    }
+
+    const resumeText = text.join("\n");
+
+    const openai = new OpenAI({
+        apiKey: process.env.OPENAI_KEY,
     });
 
-    try {
-        const data = await schema.validateAsync(req.body);
+    const completion = await openai.chat.completions.create({
+        messages: [{ role: "system", content: resumeInfoExtractionPrompt }, { role: "user", content: resumeText }],
+        model: "gpt-3.5-turbo",
+    });
 
-        const openai = new OpenAI({
-            apiKey: process.env.OPENAI_KEY,
-        });
+    const data = JSON.parse(completion.choices[0].message.content);
 
-        const completion = await openai.chat.completions.create({
-            messages: [{ role: "system", content: resumeInfoExtractionPrompt }, { role: "user", content: data.resumeText }],
-            model: "gpt-3.5-turbo",
-        });
+    return data;
+};
 
-        return res.status(200).send(JSON.parse(completion.choices[0].message.content));
-    }
-    catch (err) {
-        console.log(err)
-        return res.status(400).send(err);
-    }
+router.post("/upload", resumeUpload.single("file"), validate, async (req, res) => {
+    const newResume = new Resume({
+        userId: req.user._id,
+        fileName: req.file.filename,
+    });
+
+    await newResume.save();
+
+    const extractedData = await extractResumeData(req.file.filename);
+
+    return res.send(extractedData);
 });
 
 export default router;

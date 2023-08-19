@@ -32,7 +32,7 @@ router
         return res.status(400).json({ error: "User already exists" });
       } else if (!name || !email || !password) {
         return res.status(400).json({ error: "All fields are required" });
-      } 
+      }
 
       // Create new user and save to database
       const hashedPass = await bcrypt.hash(password, 10);
