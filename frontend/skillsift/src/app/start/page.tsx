@@ -125,6 +125,12 @@ export default function Page() {
                             placeholder="Full Name"
                             className="input input-bordered w-full"
                             value={resumeData["name"]}
+                            onChange={(e) => {
+                                setResumeData({
+                                    ...resumeData,
+                                    name: e.target.value
+                                });
+                            }}
                         />
                         <label className="label mt-4">
                             <span className="label-text">Email <span className="text-red-500">*</span></span>
@@ -134,6 +140,12 @@ export default function Page() {
                             placeholder="Email"
                             className="input input-bordered w-full"
                             value={resumeData["email"]}
+                            onChange={(e) => {
+                                setResumeData({
+                                    ...resumeData,
+                                    email: e.target.value
+                                });
+                            }}
                         />
                         <label className="label mt-4">
                             <span className="label-text">Phone</span>
@@ -143,6 +155,12 @@ export default function Page() {
                             placeholder="Phone Number"
                             className="input input-bordered w-full"
                             value={resumeData["phone"]}
+                            onChange={(e) => {
+                                setResumeData({
+                                    ...resumeData,
+                                    phone: e.target.value
+                                });
+                            }}
                         />
                         <label className="label mt-4">
                             <span className="label-text">Gender</span>
@@ -164,6 +182,12 @@ export default function Page() {
                             placeholder="Qualification"
                             className="input input-bordered w-full"
                             value={resumeData["qualification"]}
+                            onChange={(e) => {
+                                setResumeData({
+                                    ...resumeData,
+                                    qualification: e.target.value
+                                });
+                            }}
                         />
                         <button onClick={() => saveResumeData()} className={"btn btn-primary w-full mt-10 " + (uploading || (resumeData["name"].length === 0 || resumeData["email"].length === 0) ? "opacity-50" : "")}>CONTINUE</button>
                     </div>
@@ -178,6 +202,12 @@ export default function Page() {
                             placeholder="College"
                             className="input input-bordered w-full"
                             value={resumeData["college"]}
+                            onChange={(e) => {
+                                setResumeData({
+                                    ...resumeData,
+                                    college: e.target.value
+                                });
+                            }}
                         />
                         <label className="label mt-4">
                             <span className="label-text">Skills</span>
@@ -201,6 +231,12 @@ export default function Page() {
                             placeholder="Year of Graduation"
                             className="input input-bordered w-full"
                             value={resumeData["yearOfGraduation"]}
+                            onChange={(e) => {
+                                setResumeData({
+                                    ...resumeData,
+                                    yearOfGraduation: e.target.value
+                                });
+                            }}
                         />
                     </div>
                 </div>
