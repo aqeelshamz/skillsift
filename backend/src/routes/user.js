@@ -10,6 +10,7 @@ const signupSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().email().required(),
   password: Joi.string().min(8).required(),
+  type: Joi.number().integer().min(0).max(1).required(),
 });
 
 router
@@ -22,7 +23,7 @@ router
       return res.status(400).json({ error: error.details[0].message });
     }
 
-    const { name, email, password } = req.body;
+    const { name, email, password, type } = req.body;
 
     try {
       // Check if user already exists
@@ -31,9 +32,7 @@ router
         return res.status(400).json({ error: "User already exists" });
       } else if (!name || !email || !password) {
         return res.status(400).json({ error: "All fields are required" });
-      } // } else if (![0, 1, 2].includes(type)) {
-      //   return res.status(400).json({ error: "Invalid user type" });
-      // }
+      } 
 
       // Create new user and save to database
       const hashedPass = await bcrypt.hash(password, 10);
@@ -41,6 +40,7 @@ router
         name,
         email,
         password: hashedPass,
+        type
       });
       await user.save();
       res.json({ msg: "OK" });
