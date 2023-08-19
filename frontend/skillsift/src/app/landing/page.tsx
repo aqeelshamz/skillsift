@@ -88,7 +88,7 @@ export default function Landing() {
 					<p className="text-4xl">Final stop on job search.</p>
 					<p className="text-lg mt-4">
 						Upload your resume and get job recommendations based on
-						your skills. We'll send job applications on behalf of
+						your skills. We`&apos`ll send job applications on behalf of
 						you.
 					</p>
 					<label
