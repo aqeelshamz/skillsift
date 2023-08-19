@@ -3,14 +3,6 @@ import Card from "./Card";
 
 function Homepage() {
   return (
-<<<<<<< HEAD
-    <div className="flex items-center gap-3 justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
-      <Card />
-      <Card />
-      <Card />
-    </div>
-  );
-=======
 <div className="w-full h-full overflow-auto">
 
     <div className="  bg-gray-200"> 
@@ -41,7 +33,6 @@ function Homepage() {
 
 
   )
->>>>>>> cb2e044709639433de5b8b40afb94a91363f140b
 }
 
 export default Homepage;
