@@ -7,7 +7,7 @@ import Chip from './Chip';
 function Card(props:any) {
   return (
    
-   <div className="bg-white h-[450px] overflow-hidden  font-semibold flex-row items-center justify-center text-center rounded-xl border shadow-lg p-1 max-w-xs">
+   <div className="bg-white h-[450px] md:my-6 overflow-hidden  font-semibold flex-row items-center justify-center text-center rounded-xl border shadow-lg p-1 max-w-xs">
      {/* date and bookmark */}
      <div className='bg-red-200 w-[300px] overflow-hidden  h-[357px] rounded-xl '>
         <div className="flex justify-between p-3">
