@@ -58,7 +58,7 @@ export default function CompanyLayout({
           </div>
         </div>
       </div>
-      <div>{children}</div>
+      <div className="w-full">{children}</div>
     </div>
   );
 }
