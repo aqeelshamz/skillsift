@@ -7,6 +7,7 @@ const router = express.Router();
 import multer from 'multer';
 import Resume from "../models/resumeModel.js";
 import { readPdfText } from 'pdf-text-reader';
+import ResumeData from "../models/resumeDataModel.js";
 
 const resumeStorage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -60,6 +61,39 @@ router.post("/upload", resumeUpload.single("file"), validate, async (req, res) =
     const extractedData = await extractResumeData(req.file.filename);
 
     return res.send(extractedData);
+});
+
+router.post("/save-data", resumeUpload.single("file"), validate, async (req, res) => {
+    const schema = joi.object({
+        name: joi.string().required(),
+        email: joi.string().email().required(),
+        phone: joi.string().required(),
+        gender: joi.string().required(),
+        qualification: joi.string().required(),
+        college: joi.string().required(),
+        skills: joi.array().items(joi.string()).required(),
+        yearOfGraduation: joi.string().required(),
+    });
+
+    try {
+        const data = await schema.validateAsync(req.body);
+        const resumeData = await ResumeData.findOne({ userId: req.user._id });
+        if (resumeData) {
+            await ResumeData.findOneAndUpdate({ userId: req.user._id }, data);
+        }
+        else {
+            const newResumeData = new ResumeData({
+                userId: req.user._id,
+                ...data
+            });
+            await newResumeData.save();
+        }
+
+        return res.send("OK");
+    }
+    catch (err) {
+        return res.status(400).json(err);
+    }
 });
 
 export default router;
