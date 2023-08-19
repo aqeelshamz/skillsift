@@ -1,6 +1,6 @@
 import express from "express";
 import joi from "joi";
-import { OpenAIApi } from "openai";
+import OpenAI from "openai";
 const router = express.Router();
 
 router.post("/extract-data", async (req, res) => {
@@ -11,7 +11,7 @@ router.post("/extract-data", async (req, res) => {
     try {
         const data = await schema.validateAsync(req.body);
 
-        const openai = new OpenAIApi({
+        const openai = new OpenAI({
             apiKey: process.env.OPENAI_API_KEY,
         });
 
