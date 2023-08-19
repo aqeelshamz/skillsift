@@ -1,13 +1,12 @@
 import express from "express";
-import Job from "./models/Job"; // Import your Job model
+import Job from "../models/jobModel.js"; // Import your Job model
 import validate from "../utils/userValidate.js";
-import User from "../models/userModel";
+import User from "../models/userModel.js";
 const router = express.Router();
 
 // Create a new job
-router.post("/jobs", validate, async (req, res) => {
-  const { companyName, position, salary, skillsRequired, description } =
-    req.body;
+router.post("/create", validate, async (req, res) => {
+  const { companyName, position, salary, skillsRequired } = req.body;
 
   try {
     const job = new Job({
@@ -16,6 +15,7 @@ router.post("/jobs", validate, async (req, res) => {
       salary,
       skillsRequired,
       description,
+      companyId: req.user.id,
     });
 
     await job.save();

@@ -18,10 +18,11 @@ const jobSchema = new mongoose.Schema(
       type: [String], // Array of strings representing skills
       required: true,
     },
-    description: {
-      type: String,
+    companyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
-    },
+    }
   },
   { timestamps: true }
 );
