@@ -19,7 +19,8 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.3",
     "multer": "^1.4.5-lts.1",
-    "openai": "^4.0.1"
+    "openai": "^4.0.1",
+    "pdf-text-reader": "^3.0.2"
   },
   "devDependencies": {
     "body-parser": "^1.20.2",

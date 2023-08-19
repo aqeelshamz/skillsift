@@ -6,6 +6,7 @@ import validate from "../utils/userValidate.js"
 const router = express.Router();
 import multer from 'multer';
 import Resume from "../models/resumeModel.js";
+import { readPdfText } from 'pdf-text-reader';
 
 const resumeStorage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -15,6 +16,7 @@ const resumeStorage = multer.diskStorage({
         cb(null, Date.now() + "." + file.originalname.split(".")[1]);
     },
 });
+
 const resumeUpload = multer({
     storage: resumeStorage,
     fileFilter(req, file, cb) {
@@ -22,38 +24,42 @@ const resumeUpload = multer({
     },
 });
 
+const extractResumeData = async (fileName) => {
+    const pages = await readPdfText('public/' + fileName);
+    console.log(pages);
+
+    var text = [];
+    for (const page of pages) {
+        text.push(page.lines.join("\n"));
+    }
+
+    const resumeText = text.join("\n");
+
+    const openai = new OpenAI({
+        apiKey: process.env.OPENAI_KEY,
+    });
+
+    const completion = await openai.chat.completions.create({
+        messages: [{ role: "system", content: resumeInfoExtractionPrompt }, { role: "user", content: resumeText }],
+        model: "gpt-3.5-turbo",
+    });
+
+    const data = JSON.parse(completion.choices[0].message.content);
+
+    return data;
+};
+
 router.post("/upload", resumeUpload.single("file"), validate, async (req, res) => {
     const newResume = new Resume({
-        userId: req.body.userId,
+        userId: req.user._id,
         fileName: req.file.filename,
     });
 
-    return res.send(req.file.filename ?? "");
-});
+    await newResume.save();
 
-router.post("/extract-data", validate, async (req, res) => {
-    const schema = joi.object({
-        resumeText: joi.string().required(),
-    });
+    const extractedData = await extractResumeData(req.file.filename);
 
-    try {
-        const data = await schema.validateAsync(req.body);
-
-        const openai = new OpenAI({
-            apiKey: process.env.OPENAI_KEY,
-        });
-
-        const completion = await openai.chat.completions.create({
-            messages: [{ role: "system", content: resumeInfoExtractionPrompt }, { role: "user", content: data.resumeText }],
-            model: "gpt-3.5-turbo",
-        });
-
-        return res.status(200).send(JSON.parse(completion.choices[0].message.content));
-    }
-    catch (err) {
-        console.log(err)
-        return res.status(400).send(err);
-    }
+    return res.send(extractedData);
 });
 
 export default router;
