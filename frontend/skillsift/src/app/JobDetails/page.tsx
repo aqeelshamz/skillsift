@@ -19,7 +19,7 @@ export default function Page() {
 ]
 
   return (
-    <div className="bg-white w-full overflow-auto ">
+    <div className="bg-white w-full h-full overflow-auto ">
       <div className="md:text-5xl text-3xl font-extrabold mt-4 p-3 md:p-5">
         Software Engineer (Remote)
       </div>
