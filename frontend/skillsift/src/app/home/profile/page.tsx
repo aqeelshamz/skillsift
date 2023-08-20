@@ -29,8 +29,10 @@ export default function Page() {
     return <div className="flex flex-col p-5 h-full overflow-y-auto">
         <p className="font-bold text-3xl mb-5">Profile</p>
         {/* <p className="font-bold text-2xl my-5">Your Recent Job Applications</p> */}
-        <p>ATS Score</p>
-        <div className="radial-progress font-bold text-4xl mt-4" style={{ "--value": data?.resume?.atsScore * 10, "--size": "10rem" }}>{data?.resume?.atsScore}</div>
+        <p className="font-bold text-4xl my-3">{data?.user?.name}</p>
+        <p className="font-semibold my-3">ATS Score</p>
+        <div className="radial-progress font-bold text-4xl my-4" style={{ "--value": data?.resume?.atsScore * 10, "--size": "10rem" }}>{data?.resume?.atsScore}</div>
+        <p className="font-semibold my-3">ATS Remarks</p>
         <ul className="flex flex-col">
             {
                 data?.resume?.atsRemarks.map((remark: any) => {
