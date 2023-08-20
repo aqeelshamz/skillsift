@@ -27,7 +27,13 @@ export default function Page() {
         yearOfGraduation: "",
     };
 
+    const blankAtsData = {
+        score: 0.0,
+        remarks: []
+    };
+
     const [resumeData, setResumeData] = useState<any>(blankResumeData);
+    const [atsData, setAtsData] = useState<any>(blankAtsData);
 
     const uploadResume = (e: any) => {
         setUploading(true);
@@ -55,7 +61,8 @@ export default function Page() {
             })
             .then((res) => {
                 toast.success("Resume uploaded successfully!");
-                setResumeData(res.data);
+                setResumeData(res.data.data);
+                setAtsData(res.data.ats);
                 setUploading(false);
             })
             .catch((err) => {
@@ -82,6 +89,8 @@ export default function Page() {
                 "college": resumeData["college"],
                 "skills": resumeData["skills"],
                 "yearOfGraduation": resumeData["yearOfGraduation"],
+                "atsScore": atsData["score"],
+                "atsRemarks": atsData["remarks"]
             }
         };
 

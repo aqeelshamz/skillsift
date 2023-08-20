@@ -19,7 +19,7 @@ export default function CompanyLayout({
   const getData = async () => {
     const config = {
       method: "GET",
-      url: `${serverURL}/user`,
+      url: `${serverURL}/user/profile`,
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
       }
@@ -57,7 +57,7 @@ export default function CompanyLayout({
                   <span><FaBuilding /></span>
                 </div>
               </div>
-              <p className='font-semibold'>{data?.name}</p>
+              <p className='font-semibold'>{data?.user?.name}</p>
             </div>
             <FiMoreHorizontal />
           </div>

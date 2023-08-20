@@ -63,7 +63,7 @@ export default function CompanyLayout({
                 <span><FiUser /></span>
               </div>
             </div>
-            <p className='font-semibold'>{data?.name}</p>
+            <p className='font-semibold'>{data?.user?.name}</p>
           </div>
           <FiMoreHorizontal />
         </div>

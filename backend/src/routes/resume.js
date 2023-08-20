@@ -1,7 +1,7 @@
 import express from "express";
 import joi from "joi";
 import OpenAI from "openai";
-import { resumeInfoExtractionPrompt } from "../utils/util.js";
+import { atsScorePrompt, resumeInfoExtractionPrompt } from "../utils/util.js";
 import { validate } from "../utils/userValidate.js"
 const router = express.Router();
 import multer from 'multer';
@@ -45,9 +45,15 @@ const extractResumeData = async (fileName) => {
         model: "gpt-3.5-turbo",
     });
 
-    const data = JSON.parse(completion.choices[0].message.content);
+    const atsScoreCompletion = await openai.chat.completions.create({
+        messages: [{ role: "system", content: atsScorePrompt }, { role: "user", content: resumeText }],
+        model: "gpt-3.5-turbo",
+    });
 
-    return data;
+    const data = JSON.parse(completion.choices[0].message.content);
+    const ats = JSON.parse(atsScoreCompletion.choices[0].message.content);
+
+    return { data, ats };
 };
 
 router.post("/upload", resumeUpload.single("file"), validate, async (req, res) => {
@@ -73,6 +79,8 @@ router.post("/save-data", resumeUpload.single("file"), validate, async (req, res
         college: joi.string().required(),
         skills: joi.array().items(joi.string()).required(),
         yearOfGraduation: joi.string().required(),
+        atsScore: joi.number().required(),
+        atsRemarks: joi.array().items(joi.string()).required(),
     });
 
     try {

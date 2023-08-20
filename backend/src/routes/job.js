@@ -47,7 +47,8 @@ router.get("/recommended", validate, async (req, res) => {
     const resumeDataSkills = resumeData.skills;
     const jobs = await Job.find({ skillsRequired: { $in: resumeDataSkills } }).lean();
     for (const job of jobs) {
-      job.companyName = req.user.name;
+      const user = await User.findById(job.companyId).lean();
+      job.companyName = user.name;
     }
     res.json(jobs.reverse());
   } catch (error) {

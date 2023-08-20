@@ -33,7 +33,7 @@ function Card(props: CardProps) {
 
 				<div className="grid grid-cols-4">
 					<div className="col-span-3 text-left p-2 ">
-						<span className="text-base mb-7">Google</span>
+						<span className="text-base mb-7">{props.company}</span>
 
 						<div className="text-2xl">
 							{props.title}

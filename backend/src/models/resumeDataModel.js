@@ -31,6 +31,12 @@ const resumeDataSchema = new mongoose.Schema(
         yearOfGraduation: {
             type: String,
         },
+        atsScore: {
+            type: Number,
+        },
+        atsRemarks: {
+            type: Array,
+        },
     }, { timestamps: true });
 
 const ResumeData = mongoose.model('ResumeData', resumeDataSchema);

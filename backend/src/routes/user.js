@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Joi from "joi";
 import { validate } from "../utils/userValidate.js";
+import ResumeData from "../models/resumeDataModel.js";
 
 const router = express.Router();
 
@@ -15,7 +16,9 @@ const signupSchema = Joi.object({
 });
 
 router.get("/profile", validate, async (req, res) => {
-  return res.send(req.user);
+  const user = req.user;
+  const resumeData = await ResumeData.findOne({ userId: user._id }).lean();
+  return res.send({ user: user, resume: resumeData });
 });
 
 router

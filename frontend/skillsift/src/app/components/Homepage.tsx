@@ -37,7 +37,7 @@ function Homepage() {
         <div className="flex space-x- md:px-8    items-center gap-3     flex-wrap justify-start   px-3 py-1">
           {
             recommendedJobs.map((item: any, index: number) => {
-              return <Link key={index} href="/JobDetails"><Card title={item?.title} company="" logo="" date="" salary="" location="" skills={item?.skills} /></Link>
+              return <Link key={index} href="/JobDetails"><Card title={item?.title} company={item?.companyName} logo="" date="" salary="" location="" skills={item?.skillsRequired} /></Link>
             })
           }
         </div>
@@ -49,7 +49,7 @@ function Homepage() {
 
         <div className="flex space-x- md:px-8    items-center gap-3     flex-wrap justify-start   px-3 py-1">
           {recommendedJobs.map((item: any, index: number) => {
-            return <Link key={index} href="/JobDetails"><Card title={item?.title} company="" logo="" date="" salary="" location="" skills={item?.skills} /></Link>
+            return <Link key={index} href="/JobDetails"><Card title={item?.title} company={item?.companyName} logo="" date="" salary="" location="" skills={item?.skillsRequired} /></Link>
           })}
         </div>
 
