@@ -19,7 +19,7 @@ export default function CompanyLayout({
   const getData = async () => {
     const config = {
       method: "GET",
-      url: `${serverURL}/user`,
+      url: `${serverURL}/user/profile`,
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
       }

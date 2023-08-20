@@ -1,10 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Space_Grotesk } from 'next/font/google'
 
-const poppins = Poppins({
+const poppins = Space_Grotesk({
   weight: [
-    "200", "300", "400", "500", "600", "700", "800", "900"
+    "300", "400", "500", "600", "700"
   ], subsets: ['latin']
 })
 

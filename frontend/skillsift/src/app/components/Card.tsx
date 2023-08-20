@@ -15,7 +15,7 @@ type CardProps = {
   skills: string[];
 };
 
-function Card(props: any) {
+function Card(props: CardProps) {
 	return (
 		<div className="bg-white h-[450px] md:my-6 overflow-hidden  font-semibold flex-row items-center justify-center text-center rounded-xl border shadow-lg p-1 max-w-xs">
 			{/* date and bookmark */}
@@ -36,8 +36,7 @@ function Card(props: any) {
 						<span className="text-base mb-7">Google</span>
 
 						<div className="text-2xl">
-							First column with 10 units Content for the first
-							column
+							{props.title}
 						</div>
 					</div>
 					<div className="flex justify-center items-center">
@@ -52,7 +51,9 @@ function Card(props: any) {
 				</div>
 
 				<div className="flex space-x- flex-wrap justify-start overflow-hidden  px-3 py-1">
-					<Chip text="qweqwerty" />
+					{props.skills.map((skill) => {
+            return <Chip text={skill} />
+          })}
 				</div>
 			</div>
 			{/* salary & location */}
