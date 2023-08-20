@@ -19,7 +19,7 @@ export default function CompanyLayout({
         </div>
         <div className='p-0 my-2 h-full w-full overflow-hidden hover:overflow-y-auto'>
           <Link href={"/company"}><button className={(pathName === "/company" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiHome /> Dashboard</button></Link>
-          <Link href={"/company/jobs"}><button className={(pathName === "/company/jobs" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiBriefcase /> Jobs</button></Link>
+          <Link href={"/company/jobs"}><button className={(pathName.includes("/company/jobs") ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiBriefcase /> Jobs</button></Link>
           <Link href={"/company/applications"}><button className={(pathName === "/company/applications" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiFileText /> Applications</button></Link>
           <Link href={"/company/chats"}><button className={(pathName === "/company/chats" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiMessageCircle /> Chats</button></Link>
           <Link href={"/company/profile"}><button className={(pathName === "/company/profile" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiUser /> Profile</button></Link>
