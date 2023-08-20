@@ -12,7 +12,7 @@ export default function Landing() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const createAccount = async () => {
+  const createAccount = async (type: number) => {
     if (password.length < 6) {
       toast.error("Password must be atleast 6 characters long!");
       return;
@@ -29,7 +29,7 @@ export default function Landing() {
         name: name,
         email: email,
         password: password,
-        type: 0,
+        type: type,
       },
     };
 
@@ -40,7 +40,12 @@ export default function Landing() {
         setName("");
         toast.success("Account created!");
         await login(false);
-        window.location.href = "/start";
+        if (type === 0) {
+          window.location.href = "/start";
+        }
+        else {
+          window.location.href = "/company";
+        }
       })
       .catch((error) => {
         toast.error("Something went wrong!");
@@ -73,7 +78,14 @@ export default function Landing() {
       setPassword("");
       setEmail("");
       localStorage.setItem("token", response.data.token);
-      if (showToast) { window.location.href = "/home"; }
+      if (showToast) {
+        if (response.data.user.type === 0) {
+          window.location.href = "/home";
+        }
+        else {
+          window.location.href = "/company";
+        }
+      }
     }).catch((error) => {
       setLogginIn(false);
       toast.error("Something went wrong!");
@@ -86,7 +98,7 @@ export default function Landing() {
         <nav className="flex justify-between">
           <p className="text-4xl font-bold ">SkillSift</p>
           <div className="flex">
-            <button className="btn mr-2"><FaBuilding /> For Organizations</button>
+            <label htmlFor="createorgaccount_modal" className="btn mr-2"><FaBuilding /> For Organizations</label>
             <label
               htmlFor="login_modal"
               className="btn btn-primary"
@@ -184,7 +196,83 @@ export default function Landing() {
                 htmlFor="createaccount_modal"
                 className="btn btn-primary w-full"
                 onClick={() => {
-                  createAccount();
+                  createAccount(0);
+                }}
+              >
+                Create Account
+              </label>
+            </div>
+          </div>
+        </div>
+        {/* Create Organization Account Modal */}
+        <input
+          type="checkbox"
+          id="createorgaccount_modal"
+          className="modal-toggle"
+        />
+        <div className="modal">
+          <div className="modal-box">
+            <div className="flex justify-between items-center">
+              <h3 className="flex items-center font-bold text-lg">
+                <FaBuilding className="mr-2" /> Create Organization
+              </h3>
+              <label
+                htmlFor="createorgaccount_modal"
+                className="btn btn-circle"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </label>
+            </div>
+            <p>Get started by creating an organization account!</p>
+            <label className="label mt-4">
+              <span className="label-text">Organization Name</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Organization Name"
+              className="input input-bordered w-full"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <label className="label mt-4">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Email"
+              className="input input-bordered w-full"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label className="label mt-4">
+              <span className="label-text">Password</span>
+            </label>
+            <input
+              type="password"
+              placeholder="Password"
+              className="input input-bordered w-full"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
+            <div className="modal-action">
+              <label
+                htmlFor="createorgaccount_modal"
+                className="btn btn-primary w-full"
+                onClick={() => {
+                  createAccount(1);
                 }}
               >
                 Create Account
