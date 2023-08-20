@@ -23,7 +23,7 @@ export default function Page() {
                 <tbody>
                     {
                         [...Array(10)].map((item: any, index: number) => {
-                            return <tr>
+                            return <tr key={index}>
                                 <th className="text-md font-semibold">1</th>
                                 <td className="text-md font-semibold">Full Stack Developer (Remote)</td>
                                 <td className="text-md font-semibold">Google Inc.</td>

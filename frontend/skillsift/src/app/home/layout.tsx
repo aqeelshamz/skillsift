@@ -3,6 +3,8 @@ import { FiBook, FiBriefcase, FiFileText, FiGift, FiHome, FiLogOut, FiMessageCir
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import React, { useEffect } from "react";
+import axios from "axios";
+import { serverURL } from "@/utils/util";
 
 export default function CompanyLayout({
   children,
@@ -12,10 +14,28 @@ export default function CompanyLayout({
 
   const [loaded, setLoaded] = React.useState(false);
 
+  const [data, setData] = React.useState<any>({});
+
+  const getData = async () => {
+    const config = {
+      method: "GET",
+      url: `${serverURL}/user`,
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      }
+    };
+
+    axios(config)
+      .then(async (response) => {
+        setData(response.data);
+      })
+  }
+
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       window.location.href = "/landing";
     }
+    getData();
     setTimeout(() => {
       setLoaded(true);
     }, 1000);
@@ -43,7 +63,7 @@ export default function CompanyLayout({
                 <span><FiUser /></span>
               </div>
             </div>
-            <p className='font-semibold'>Sample User</p>
+            <p className='font-semibold'>{data?.name}</p>
           </div>
           <FiMoreHorizontal />
         </div>

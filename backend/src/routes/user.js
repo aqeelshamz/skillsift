@@ -3,6 +3,7 @@ import UserModel from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Joi from "joi";
+import { validate } from "../utils/userValidate.js";
 
 const router = express.Router();
 
@@ -11,6 +12,10 @@ const signupSchema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().min(8).required(),
   type: Joi.number().integer().min(0).max(1).required(),
+});
+
+router.get("/", validate, async (req, res) => {
+  return res.send(req.user);
 });
 
 router

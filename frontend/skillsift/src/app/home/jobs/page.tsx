@@ -8,8 +8,8 @@ export default function Page() {
         <p className="font-bold text-3xl">Jobs</p>
         <p className="font-bold text-2xl my-5">Recommended Jobs</p>
         {
-            [...Array(10)].map((item) => {
-                return <div className="flex justify-between p-4 bg-gray-100 rounded-lg mb-3">
+            [...Array(10)].map((item: any, index: number) => {
+                return <div key={index} className="flex justify-between p-4 bg-gray-100 rounded-lg mb-3">
                     <div className="flex flex-col">
                         <p className="font-semibold text-xl mb-2">Software Engineer (Remote)</p>
                         <p className="flex items-center font-semibold text-md mb-4"><FaBuilding className="mr-2" /> Google</p>

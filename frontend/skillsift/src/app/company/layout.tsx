@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { FaBuilding } from "react-icons/fa";
+import axios from "axios";
+import { serverURL } from "@/utils/util";
 
 export default function CompanyLayout({
   children,
@@ -11,6 +13,27 @@ export default function CompanyLayout({
   children: React.ReactNode;
 }) {
   const pathName = usePathname();
+
+  const [data, setData] = React.useState<any>({});
+
+  const getData = async () => {
+    const config = {
+      method: "GET",
+      url: `${serverURL}/user`,
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      }
+    };
+
+    axios(config)
+      .then(async (response) => {
+        setData(response.data);
+      })
+  }
+
+  React.useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className="flex flex-row h-full">
@@ -34,7 +57,7 @@ export default function CompanyLayout({
                   <span><FaBuilding /></span>
                 </div>
               </div>
-              <p className='font-semibold'>Sample User</p>
+              <p className='font-semibold'>{data?.name}</p>
             </div>
             <FiMoreHorizontal />
           </div>
