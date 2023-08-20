@@ -32,12 +32,12 @@ export default function Page() {
         {/* <p className="font-bold text-2xl my-5">Your Recent Job Applications</p> */}
         <p className="font-bold text-4xl my-3">{data?.user?.name}</p>
         <p className="font-semibold my-3">ATS Score</p>
-        <div className="radial-progress font-bold text-4xl my-4" style={{ "--value": data?.resume?.atsScore * 10, "--size": "10rem" }}>{data?.resume?.atsScore}</div>
+        <div className="radial-progress font-bold text-4xl my-4" style={{ "--value": data?.resume?.atsScore * 10, "--size": "10rem" } as React.CSSProperties}>{data?.resume?.atsScore}</div>
         <p className="font-semibold my-3">ATS Remarks</p>
         <ul className="flex flex-col">
             {
-                data?.resume?.atsRemarks.map((remark: any) => {
-                    return <Tick color={false} text={remark} />
+                data?.resume?.atsRemarks.map((remark: any, index : any) => {
+                    return <Tick color={false} key={index} text={remark} />
                 })
             }
         </ul>
