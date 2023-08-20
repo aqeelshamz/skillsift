@@ -5,6 +5,16 @@ import Image from "next/image";
 import { BsBookmark } from "react-icons/bs";
 import Chip from "./Chip";
 
+type CardProps = {
+  title: string;
+  company: string;
+  logo: string;
+  date: string;
+  salary: string;
+  location: string;
+  skills: string[];
+};
+
 function Card(props: any) {
 	return (
 		<div className="bg-white h-[450px] md:my-6 overflow-hidden  font-semibold flex-row items-center justify-center text-center rounded-xl border shadow-lg p-1 max-w-xs">
@@ -43,14 +53,6 @@ function Card(props: any) {
 
 				<div className="flex space-x- flex-wrap justify-start overflow-hidden  px-3 py-1">
 					<Chip text="qweqwerty" />
-					<Chip text="tewertxt" />
-					<Chip text="tewertyxt" />
-					<Chip text="qweqwerty" />
-					<Chip text="tewertxt" />
-					<Chip text="tewertyxt" />
-					<Chip text="qweqwerty" />
-					<Chip text="tewertxt" />
-					<Chip text="tewertyxt" />
 				</div>
 			</div>
 			{/* salary & location */}

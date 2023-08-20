@@ -2,6 +2,7 @@ import express from "express";
 import Job from "../models/jobModel.js"; // Import your Job model
 import { validate, validateCompany } from "../utils/userValidate.js";
 import User from "../models/userModel.js";
+import ResumeData from "../models/resumeDataModel.js";
 const router = express.Router();
 
 // Create a new job
@@ -30,6 +31,21 @@ router.post("/create", validateCompany, async (req, res) => {
 router.get("/list", validateCompany, async (req, res) => {
   try {
     const jobs = await Job.find({ companyId: req.user._id }).lean();
+    for (const job of jobs) {
+      job.companyName = req.user.name;
+    }
+    res.json(jobs.reverse());
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+})
+
+router.get("/recommended", validate, async (req, res) => {
+  try {
+    const resumeData = await ResumeData.findOne({ userId: req.user._id }).lean();
+    const resumeDataSkills = resumeData.skills;
+    const jobs = await Job.find({ skillsRequired: { $in: resumeDataSkills } }).lean();
     for (const job of jobs) {
       job.companyName = req.user.name;
     }

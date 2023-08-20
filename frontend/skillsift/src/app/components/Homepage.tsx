@@ -2,8 +2,32 @@
 import Image from "next/image";
 import Card from "./Card";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { serverURL } from "@/utils/util";
 
 function Homepage() {
+  const [recommendedJobs, setRecommendedJobs] = useState<any>([]);
+
+  const getRecommendedJobs = async () => {
+    const config = {
+      method: "GET",
+      url: `${serverURL}/job/recommended`,
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
+    axios(config)
+      .then(async (response) => {
+        setRecommendedJobs(response.data);
+      })
+  }
+
+  useEffect(() => {
+    getRecommendedJobs();
+  }, []);
+
   return (
     <div className="w-full h-full overflow-auto">
 
@@ -24,8 +48,8 @@ function Homepage() {
         <p className="text-2xl sm:text-5xl font-extrabold p-6">Recommended jobs</p>
 
         <div className="flex space-x- md:px-8    items-center gap-3     flex-wrap justify-start   px-3 py-1">
-          {[...Array(5)].map((item: any, index: number) => {
-            return <Link key={index} href="/JobDetails"><Card /></Link>
+          {recommendedJobs.map((item: any, index: number) => {
+            return <Link key={index} href="/JobDetails"><Card  /></Link>
           })}
         </div>
 
