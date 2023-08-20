@@ -3,6 +3,7 @@ import axios from "axios";
 import React from "react";
 import { serverURL } from "@/utils/util";
 import Link from "next/link";
+import Tick from "../../components/Tick";
 
 export default function Page() {
     const [data, setData] = React.useState<any>({});
@@ -36,7 +37,7 @@ export default function Page() {
         <ul className="flex flex-col">
             {
                 data?.resume?.atsRemarks.map((remark: any) => {
-                    return <li className="badge">{remark}</li>
+                    return <Tick color={false} text={remark} />
                 })
             }
         </ul>

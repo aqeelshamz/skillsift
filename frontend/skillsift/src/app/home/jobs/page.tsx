@@ -4,9 +4,14 @@ import { FaBuilding, FaCashRegister, FaCoins, FaDollarSign } from "react-icons/f
 import { FiArrowRight, FiBriefcase, FiCalendar, FiDollarSign } from "react-icons/fi";
 
 export default function Page() {
+    const [tabIndex, setTabIndex] = React.useState<number>(0);
+
     return <div className="flex flex-col p-5 h-full overflow-y-auto">
         <p className="font-bold text-3xl">Jobs</p>
-        <p className="font-bold text-2xl my-5">Recommended Jobs</p>
+        <div className="my-5">
+            <button onClick={() => setTabIndex(0)} className={"btn btn-md mr-1 " + (tabIndex === 0 ? "btn-primary" : "")}>ALL</button>
+            <button onClick={() => setTabIndex(1)} className={"btn btn-md " + (tabIndex === 1 ? "btn-primary" : "")}>RECOMMENDED</button>
+        </div>
         {
             [...Array(10)].map((item: any, index: number) => {
                 return <div key={index} className="flex justify-between p-4 bg-gray-100 rounded-lg mb-3">

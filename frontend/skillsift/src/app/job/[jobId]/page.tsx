@@ -80,7 +80,7 @@ export default function Page({ params: { jobId } }: Params) {
 	}
 
 	return (
-		<div className="bg-white w-full h-full overflow-auto ">
+		<div className="bg-white w-full h-full px-4 overflow-auto ">
 			<div className="md:text-5xl text-3xl font-extrabold mt-4 p-3 md:p-5">
 				{job?.title}
 			</div>
@@ -88,12 +88,12 @@ export default function Page({ params: { jobId } }: Params) {
 				{job?.companyName}
 			</div>
 			<div className="md:flex">
-				<div className="">
+				<div className="w-full">
 					<div className="md:text-2xl text-lg max-w-[1100px] text-justify  font-semibold opacity-90 p-3 md:px-5 ">
 						{job?.description}
 					</div>
-					<div className="hidden md:block">
-						<div className=" md:text-3xl text-xl  font-semibold p-3 md:px-5 md:flex mt-10 mb-20 flex-col">
+					<div className="hidden w-full md:block">
+						<div className="w-full md:text-3xl text-xl  font-semibold p-3 md:px-5 md:flex mt-10 mb-20 flex-col">
 							<div className="flex mb-10">
 								{" "}
 								<BsCashStack
@@ -103,27 +103,29 @@ export default function Page({ params: { jobId } }: Params) {
 								<span className="opacity-60">Salary : </span>{" "}
 								<span className="opacity-90">₹ {job?.salary}</span>
 							</div>
-							<button
-								type="button"
-								className={"btn btn-primary btn-lg " + (loading ? "opacity-50" : "")}
-								onClick={() => applyJob()}
-							>
-								Apply Now !
-							</button>
+							<div className="flex">
+								<button
+									type="button"
+									className={"min-w-[30vh] btn btn-primary btn-lg " + (loading || job.applied ? "opacity-50" : "")}
+									onClick={() => applyJob()}
+								>
+									{job.applied ? "Already Applied" : "Apply Now"}
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div className="">
+				<div className="min-w-[30vw]">
 					<div className="md:text-3xl text-xl font-semibold opacity-60 p-3 md:px-5 flex">
 						<SiMusicbrainz className="opacity-90 mr-1" size={30} />{" "}
 						Skill Required{" "}
 					</div>
 					{job?.skillsRequired?.map((item: string, index: number) => (
 						<li
-							className="md:text-3xl text-xl font-semibold opacity-90 p-3 md:px-5 flex"
+							className=" md:text-3xl text-xl font-semibold opacity-90 p-3 md:px-5 flex"
 							key={index}
 						>
-							{item}
+							 {item}
 						</li>
 					))}
 				</div>

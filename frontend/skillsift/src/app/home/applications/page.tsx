@@ -6,7 +6,7 @@ import { FiArrowRight, FiBriefcase, FiCalendar, FiDollarSign } from "react-icons
 export default function Page() {
     return <div className="flex flex-col p-5 h-full overflow-y-auto">
         <p className="font-bold text-3xl">Applications</p>
-        <p className="font-bold text-2xl my-5">Your Recent Job Applications</p>
+        <p className="font-bold text-2xl my-4 opacity-60">Your Recent Job Applications</p>
         <div className="overflow-x-auto">
             <table className="table table-zebra">
                 {/* head */}

@@ -48,7 +48,7 @@ export default function CompanyLayout({
         <p className="mb-5 max-sm:mb-3 text-xl font-bold">💼 SkillSift</p>
       </div>
       <div className='p-0 my-2 h-full w-full overflow-hidden hover:overflow-y-auto'>
-        <Link href={"/home"}><button className={(pathName === "/home" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiHome /> Dashboard</button></Link>
+        <Link href={"/home"}><button className={(pathName === "/home" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiHome /> Home</button></Link>
         <Link href={"/home/jobs"}><button className={(pathName === "/home/jobs" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiBriefcase /> Jobs</button></Link>
         <Link href={"/home/applications"}><button className={(pathName === "/home/applications" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiFileText /> Applications</button></Link>
         <Link href={"/home/chats"}><button className={(pathName === "/home/chats" ? "btn-neutral bg-black text-white " : "bg-white ") + "flex justify-start btn mb-2 w-full"}><FiMessageCircle /> Chats</button></Link>

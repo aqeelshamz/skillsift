@@ -4,6 +4,7 @@ import { validate, validateCompany } from "../utils/userValidate.js";
 import User from "../models/userModel.js";
 import ResumeData from "../models/resumeDataModel.js";
 import joi from "joi";
+import Application from "../models/applicationModel.js";
 
 const router = express.Router();
 
@@ -53,9 +54,48 @@ router.post("/by-id", validate, async (req, res) => {
     const data = await schema.validateAsync(req.body);
     var job = await Job.findById(data.jobId).lean();
     job.companyName = (await User.findById(job.companyId).lean()).name;
+
+    const application = await Application.findOne({ userId: req.user._id, jobId: data.jobId }).lean();
+    if (application) {
+      job.applied = true;
+    }
+    else {
+      job.applied = false;
+    }
+
     return res.send(job);
   }
   catch (err) {
+    return res.status(400).json(err);
+  }
+})
+
+
+router.post("/apply", validate, async (req, res) => {
+  const schema = joi.object({
+    jobId: joi.string().required()
+  });
+
+  try {
+    const data = await schema.validateAsync(req.body);
+    const application = await Application.findOne({ userId: req.user._id, jobId: data.jobId }).lean();
+
+    if (application) {
+      return res.status(400).json({ error: "Already applied" });
+    }
+    else {
+      const newApplication = new Application({
+        userId: req.user._id,
+        jobId: data.jobId,
+        status: "Pending"
+      });
+
+      await newApplication.save();
+    }
+    return res.send("Applied");
+  }
+  catch (err) {
+    console.log(err)
     return res.status(400).json(err);
   }
 })
