@@ -1,9 +1,27 @@
-"use client";
 import React from "react";
+import ChatForm from "@/app/components/Chat";
+import UserCard from "@/app/components/UserCard";
 
-export default function Page() {
-    return <div className="flex flex-col p-5 h-full overflow-y-auto">
+const ChatPage = () => {
+  return (
+    <div className="flex p-8 flex-row bg-neutral-100 h-full shadow-md">
+      <div className="w-1/2">
         <p className="font-bold text-3xl">Chats</p>
-        {/* <p className="font-bold text-2xl my-5">Your Recent Job Applications</p> */}
+        <div className="flex flex-col bg-white w-1/2 h-full overflow-auto">
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+        </div>
+      </div>
+      <ChatForm />
     </div>
-}
+  );
+};
+
+export default ChatPage;
