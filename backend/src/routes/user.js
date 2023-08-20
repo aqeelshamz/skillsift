@@ -14,7 +14,7 @@ const signupSchema = Joi.object({
   type: Joi.number().integer().min(0).max(1).required(),
 });
 
-router.get("/", validate, async (req, res) => {
+router.get("/profile", validate, async (req, res) => {
   return res.send(req.user);
 });
 
