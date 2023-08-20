@@ -1,11 +1,12 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { BiBriefcaseAlt2 } from "react-icons/bi";
 import { useState } from "react";
 import axios from "axios";
 import { FaBuilding, FaDollarSign } from "react-icons/fa";
 import { FiArrowRight, FiBriefcase, FiCalendar, FiPlus } from "react-icons/fi";
 import Link from "next/link";
+import { serverURL } from "@/utils/util";
 
 interface Job {
   id: number;
@@ -16,7 +17,6 @@ interface Job {
 }
 
 export default function JobsPage() {
-  const [jobs, setJobs] = useState<Job[]>([]);
   const [formData, setFormData] = useState({
     companyName: "",
     position: "",
@@ -52,17 +52,39 @@ export default function JobsPage() {
   //   window.my_modal_2.close();
   // };
 
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [jobs, setJobs] = useState<any>([]);
+
+  const getJobs = async () => {
+    const config = {
+      method: "GET",
+      url: `${serverURL}/job/list`,
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
+    axios(config)
+      .then(async (response) => {
+        setJobs(response.data);
+      })
+  }
+
+  useEffect(() => {
+    getJobs();
+  }, []);
+
   return (
     <div className="flex flex-col p-5 h-full overflow-y-auto">
       <p className="font-bold text-3xl">Jobs</p>
       <div className="flex"><Link href="/company/jobs/new"><label htmlFor="newjob_modal" className="btn btn-primary my-5"><FiPlus /> New Job</label></Link></div>
       {
-        [...Array(10)].map((item) => {
-          return <div className="flex justify-between p-4 bg-gray-100 rounded-lg mb-3">
+        jobs?.map((item: any, index: number) => {
+          return <div key={index} className="flex justify-between p-4 bg-gray-100 rounded-lg mb-3">
             <div className="flex flex-col">
-              <p className="font-semibold text-xl mb-2">Software Engineer (Remote)</p>
-              <p className="flex items-center font-semibold text-md mb-4"><FaBuilding className="mr-2" /> Google</p>
-              <p className="flex items-center text-md"><FiBriefcase className="mr-2" />Required Skills: Next.js, MongoDB, Node.js</p>
+              <p className="font-semibold text-xl mb-2">{item.title}</p>
+              <p className="flex items-center font-semibold text-md mb-4"><FaBuilding className="mr-2" /> {item.companyName}</p>
+              <p className="flex items-center text-md"><FiBriefcase className="mr-2" />Required Skills: {item.s}</p>
               <p className="flex items-center text-md"><FiCalendar className="mr-2" />Deadline: 20 August 2023</p>
             </div>
             <div className="flex flex-col justify-between">

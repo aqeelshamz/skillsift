@@ -27,9 +27,13 @@ router.post("/create", validateCompany, async (req, res) => {
 });
 
 // Get all jobs
-router.get("/list", async (req, res) => {
+router.get("/list", validateCompany, async (req, res) => {
   try {
-    res.json(await Job.find());
+    const jobs = await Job.find({ companyId: req.user._id }).lean();
+    for (const job of jobs) {
+      job.companyName = req.user.name;
+    }
+    res.json(jobs.reverse());
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
