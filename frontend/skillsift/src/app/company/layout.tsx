@@ -3,6 +3,7 @@ import { FiBriefcase, FiFileText, FiHome, FiLogOut, FiMessageCircle, FiMoreHoriz
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { FaBuilding } from "react-icons/fa";
 
 export default function CompanyLayout({
   children,
@@ -30,7 +31,7 @@ export default function CompanyLayout({
             <div className='flex items-center'>
               <div className="avatar placeholder mr-2">
                 <div className="bg-blue-700 text-white mask mask-squircle w-10">
-                  <span><FiUser /></span>
+                  <span><FaBuilding /></span>
                 </div>
               </div>
               <p className='font-semibold'>Sample User</p>
