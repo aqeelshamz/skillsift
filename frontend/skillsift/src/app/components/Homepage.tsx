@@ -31,11 +31,11 @@ function Homepage() {
 		<div className="w-full h-full overflow-auto">
 			<div>
 				<p className="text-2xl sm:text-3xl font-extrabold p-6">
-					Recent jobs
+					Recommended jobs
 				</p>
 
 				<div className="flex space-x- md:px-8    items-center gap-3     flex-wrap justify-start   px-3 py-1">
-					{[...Array(3)].map((item: any, index: number) => {
+					{[...Array(5)].map((item: any, index: number) => {
 						return (
 							<Link key={index} href="/JobDetails">
 								<Card />
@@ -45,7 +45,7 @@ function Homepage() {
 				</div>
 			</div>
 
-			<div>
+			{/* <div>
 				<p className="text-2xl sm:text-5xl font-extrabold p-6">
 					Recommended jobs
 				</p>
@@ -59,7 +59,7 @@ function Homepage() {
 						);
 					})}
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 }

@@ -5,6 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FiArrowRight, FiLogIn } from "react-icons/fi";
+import Image from "next/image";
 import { FaBuilding } from "react-icons/fa";
 
 export default function Landing() {
@@ -112,7 +113,7 @@ export default function Landing() {
           </div>
         </nav>
         <main className="relative w-full h-full flex justify-center items-center flex-col">
-          <img className="absolute opacity-10" style={{ width: "50vw" }} src={"https://static.vecteezy.com/system/resources/previews/021/096/523/original/3d-icon-job-search-png.png"} />
+          <Image alt="alt" className="absolute opacity-10" style={{ width: "50vw" }} src={"https://static.vecteezy.com/system/resources/previews/021/096/523/original/3d-icon-job-search-png.png"} />
           <div className="absolute flex flex-col justify-center items-center">
             <p className="text-4xl">Final stop on job search.</p>
             <p className="text-lg mt-4">
