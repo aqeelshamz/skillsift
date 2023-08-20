@@ -3,8 +3,42 @@
 import Homepage from "../components/Homepage";
 import { SiMusicbrainz } from "react-icons/si";
 import { BsCashStack } from "react-icons/bs";
+import { serverURL } from "@/utils/util";
+import React, { useEffect } from "react";
+import axios from "axios";
 
-export default function Page() {
+type Params = {
+	params: {
+		jobId: string
+	}
+}
+
+
+export default function Page({ params: { jobId } }: Params) {
+
+	const [job, setJob] = React.useState<any>({});
+
+	const getJob = async () => {
+		const config = {
+			method: "POST",
+			url: `${serverURL}/job/by-id`,
+			headers: {
+				"Authorization": `Bearer ${localStorage.getItem("token")}`,
+				"Content-Type": "application/json"
+			},
+			data: {
+				jobId: jobId
+			}
+		};
+
+		axios(config)
+			.then(async (response) => {
+				setJob(response.data);
+			})
+	}
+
+	useEffect(() => { getJob() }, [])
+
 	const skill = [
 		"Programming Languages",
 		"Web Development",
@@ -21,27 +55,15 @@ export default function Page() {
 	return (
 		<div className="bg-white w-full h-full overflow-auto ">
 			<div className="md:text-5xl text-3xl font-extrabold mt-4 p-3 md:p-5">
-				Software Engineer (Remote)
+				{job?.title}
 			</div>
 			<div className="md:text-3xl text-xl font-semibold opacity-60 p-3 md:px-5 ">
-				Google
+				{job?.companyName}
 			</div>
 			<div className="md:flex">
 				<div className="">
 					<div className="md:text-2xl text-lg max-w-[1100px] text-justify  font-semibold opacity-90 p-3 md:px-5 ">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Quisque gravida, mauris eget varius malesuada, nunc
-						risus laoreet odio, vel lacinia nisi orci id justo.
-						Pellentesque id feugiat felis. Maecenas ac urna eu velit
-						facilisis dignissim. Praesent nec arcu sit amet sem
-						euismod ullamcorper. Proin facilisis justo non risus
-						tincidunt, a venenatis purus congue. Vestibulum ante
-						ipsum primis in faucibus orci luctus et ultrices posuere
-						cubilia Curae; Quisque vitae mi ac nulla fermentum
-						tincidunt. Vivamus lacinia, quam et vulputate porttitor,
-						tortor velit gravida est, vel fermentum nulla arcu non
-						augue. Donec sed eros et odio facilisis dignissim.
-						Suspendisse potenti.
+						{job?.description}
 					</div>
 					<div className="hidden md:block">
 						<div className=" md:text-3xl text-xl  font-semibold p-3 md:px-5 md:flex sm:items-center mt-10 mb-20">
@@ -52,7 +74,7 @@ export default function Page() {
 									size={30}
 								/>{" "}
 								<span className="opacity-60">Salary : </span>{" "}
-								<span className="opacity-90"> ₹200000</span>
+								<span className="opacity-90">₹ {job?.salary}</span>
 							</div>
 							<button
 								type="button"
@@ -68,7 +90,7 @@ export default function Page() {
 						<SiMusicbrainz className="opacity-90 mr-1" size={30} />{" "}
 						Skill Required{" "}
 					</div>
-					{skill.map((item: string, index: number) => (
+					{job?.skillsRequired?.map((item: string, index: number) => (
 						<li
 							className="md:text-3xl text-xl font-semibold opacity-90 p-3 md:px-5 flex"
 							key={index}
@@ -84,7 +106,7 @@ export default function Page() {
 					<div className="flex">
 						<BsCashStack className="opacity-60 mr-1" size={30} />{" "}
 						<span className="opacity-60">Salary : </span>{" "}
-						<span className="opacity-90"> ₹200000</span>
+						<span className="opacity-90">₹ {job?.salary}</span>
 					</div>
 					<button
 						type="button"

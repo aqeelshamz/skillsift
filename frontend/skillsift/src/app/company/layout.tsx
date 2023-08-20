@@ -36,7 +36,7 @@ export default function CompanyLayout({
   }, []);
 
   return (
-    <div className="flex flex-row h-full">
+    <div className="flex flex-row h-full w-full">
       <div className={'flex flex-col p-5 min-w-[300px] max-w-[20vw] h-full rounded-md max-sm:fixed max-sm:w-full max-sm:h-full max-sm:max-w-none bg-base-100 max-sm:z-50 '}>
         <div className="flex items-center mb-4">
           <p className="text-xl font-bold">💼 SkillSift</p><label className="ml-2 cursor-pointer badge badge-primary badge-outline">ORGANIZATIONS</label>

@@ -75,7 +75,7 @@ export default function JobsPage() {
   }, []);
 
   return (
-    <div className="flex flex-col p-5 h-full overflow-y-auto">
+    <div className="flex flex-col p-5 w-full h-full overflow-y-auto">
       <p className="font-bold text-3xl">Jobs</p>
       <div className="flex"><Link href="/company/jobs/new"><label htmlFor="newjob_modal" className="btn btn-primary my-5"><FiPlus /> New Job</label></Link></div>
       {

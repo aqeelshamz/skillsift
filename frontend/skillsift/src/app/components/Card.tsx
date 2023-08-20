@@ -22,7 +22,7 @@ function Card(props: CardProps) {
 			<div className="bg-red-200 w-[300px] overflow-hidden  h-[357px] rounded-xl ">
 				<div className="flex justify-between p-3">
 					<span className="bg-white text-lg font-semibold p-2 rounded-2xl">
-						20 may 2023
+						Deadline: {props.date}
 					</span>
 					<span className="bg-white text-lg font-semibold w-10 h-10 flex justify-center items-center rounded-full">
 						<BsBookmark size={22} />
@@ -63,11 +63,11 @@ function Card(props: CardProps) {
 						<div className="text-left">
 							{" "}
 							<span className="bg-white text-lg font-semibold p-2 rounded-2xl">
-								₹ 2,00,000
+								₹ {props?.salary}
 							</span>
 							<br />{" "}
 							<span className="bg-white text-base font-semibold p-2 opacity-60 rounded-2xl">
-								Bengaluru
+								{props?.location}
 							</span>
 						</div>
 						<button

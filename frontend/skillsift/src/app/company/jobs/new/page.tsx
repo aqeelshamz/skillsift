@@ -17,6 +17,7 @@ export default function Page() {
 
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
+    const [location, setLocation] = useState<string>("");
     const [salary, setSalary] = useState<number>(0);
     const [deadline, setDeadline] = useState<string>("");
 
@@ -69,7 +70,8 @@ export default function Page() {
                 "description": description,
                 "salary": salary,
                 "deadline": deadline,
-                "skillsRequired": skills
+                "skillsRequired": skills,
+                "location": location
             }
         };
 
@@ -85,7 +87,7 @@ export default function Page() {
             });
     }
 
-    return <div className="max-w-[50vh] w-full h-full p-5">
+    return <div className="max-w-[50vh] w-full h-full p-5 overflow-y-auto">
         <p className="font-bold text-3xl">Create New Job</p>
         <label className="label mt-4">
             <span className="label-text">Upload Job via PDF</span>
@@ -117,6 +119,16 @@ export default function Page() {
         </label>
         <textarea className="textarea textarea-bordered w-full" placeholder="Job Description" value={description}
             onChange={(x) => setDescription(x.target.value)}></textarea>
+        <label className="label mt-4">
+            <span className="label-text">Location</span>
+        </label>
+        <input
+            type="text"
+            placeholder="Job Location"
+            className="input input-bordered w-full"
+            value={location}
+            onChange={(x) => setLocation(x.target.value)}
+        />
         <label className="label mt-4">
             <span className="label-text">Salary</span>
         </label>

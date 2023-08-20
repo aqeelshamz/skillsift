@@ -6,7 +6,7 @@ Send value as empty string if required data is not available in the given text. 
 
 const atsScorePrompt = `You are a resume ATS scorer and checker. 
 User will provide the details of their resume/CV. 
-You will send the ATS score with remarks in an array. 
+You will send the ATS score (out of 10) with remarks in an array. 
 Format: {\"score\": <score>, \"remarks\": [\"remark1\", \"remark2\", \"remark3\", \"remark4\"]}. 
 Your response must be JSON parsable (JSON.parse)`;
 

@@ -11,7 +11,7 @@ const DashboardPage = () => {
 	}, [])
 
 	return (
-		<div className="flex p-8 flex-col h-full">
+		<div className="flex p-8 flex-col h-full w-full">
 			{/* Example Content */}
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				<div className="stats shadow">

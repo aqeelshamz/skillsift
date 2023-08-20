@@ -3,11 +3,13 @@ import Job from "../models/jobModel.js"; // Import your Job model
 import { validate, validateCompany } from "../utils/userValidate.js";
 import User from "../models/userModel.js";
 import ResumeData from "../models/resumeDataModel.js";
+import joi from "joi";
+
 const router = express.Router();
 
 // Create a new job
 router.post("/create", validateCompany, async (req, res) => {
-  const { title, description, salary, skillsRequired, deadline } = req.body;
+  const { title, description, salary, skillsRequired, deadline, location } = req.body;
 
   try {
     const job = new Job({
@@ -16,6 +18,7 @@ router.post("/create", validateCompany, async (req, res) => {
       salary,
       skillsRequired,
       deadline,
+      location,
       companyId: req.user._id
     });
 
@@ -38,6 +41,22 @@ router.get("/list", validateCompany, async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
+  }
+})
+
+router.post("/by-id", validate, async (req, res) => {
+  const schema = joi.object({
+    jobId: joi.string().required()
+  });
+
+  try {
+    const data = await schema.validateAsync(req.body);
+    var job = await Job.findById(data.jobId).lean();
+    job.companyName = (await User.findById(job.companyId).lean()).name;
+    return res.send(job);
+  }
+  catch (err) {
+    return res.status(400).json(err);
   }
 })
 
