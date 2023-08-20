@@ -36,8 +36,7 @@ function Card(props: any) {
 						<span className="text-base mb-7">Google</span>
 
 						<div className="text-2xl">
-							First column with 10 units Content for the first
-							column
+							Software Developer (Remote)
 						</div>
 					</div>
 					<div className="flex justify-center items-center">
@@ -52,7 +51,7 @@ function Card(props: any) {
 				</div>
 
 				<div className="flex space-x- flex-wrap justify-start overflow-hidden  px-3 py-1">
-					<Chip text="qweqwerty" />
+					<Chip text="C++" />
 				</div>
 			</div>
 			{/* salary & location */}
@@ -66,7 +65,7 @@ function Card(props: any) {
 							</span>
 							<br />{" "}
 							<span className="bg-white text-base font-semibold p-2 opacity-60 rounded-2xl">
-								Kochi
+								Bengaluru
 							</span>
 						</div>
 						<button

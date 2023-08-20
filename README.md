@@ -21,9 +21,7 @@ Skills provides an efficient system to populate job applications with the extrac
 
 SkillSift have a chat feature which allows job-seekers and job providers to communicate together within the platfrom.
 
-SkillSift is confident about its Unique Selling Propositions. As SkillSift is based on Applicant Tracking
-
-System or ATS, it ensures standards such as comprehensive job matching, connecting oppurtunities that align with skillsets.
+SkillSift is confident about its Unique Selling Propositions. As SkillSift is based on Applicant Tracking System or ATS, it ensures standards such as comprehensive job matching, connecting oppurtunities that align with skillsets.
 
 SkillSift has a user centric approach which solely focuses on the needs of job-seekers and job-providers.
 
