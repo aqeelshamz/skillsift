@@ -67,7 +67,7 @@ function Card(props: CardProps) {
 							</span>
 							<br />{" "}
 							<span className="bg-white text-base font-semibold p-2 opacity-60 rounded-2xl">
-								Kochi
+								Bengaluru
 							</span>
 						</div>
 						<button

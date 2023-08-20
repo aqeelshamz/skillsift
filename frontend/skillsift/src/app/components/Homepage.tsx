@@ -7,33 +7,45 @@ import axios from "axios";
 import { serverURL } from "@/utils/util";
 
 function Homepage() {
-  const [recommendedJobs, setRecommendedJobs] = useState<any>([]);
+	const [recommendedJobs, setRecommendedJobs] = useState<any>([]);
 
-  const getRecommendedJobs = async () => {
-    const config = {
-      method: "GET",
-      url: `${serverURL}/job/recommended`,
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
+	const getRecommendedJobs = async () => {
+		const config = {
+			method: "GET",
+			url: `${serverURL}/job/recommended`,
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
+			},
+		};
 
-    axios(config)
-      .then(async (response) => {
-        setRecommendedJobs(response.data);
-      })
-  }
+		axios(config).then(async (response) => {
+			setRecommendedJobs(response.data);
+		});
+	};
 
-  useEffect(() => {
-    getRecommendedJobs();
-  }, []);
+	useEffect(() => {
+		getRecommendedJobs();
+	}, []);
 
-  return (
-    <div className="w-full h-full overflow-auto">
+	return (
+		<div className="w-full h-full overflow-auto">
+			<div>
+				<p className="text-2xl sm:text-3xl font-extrabold p-6">
+					Recommended jobs
+				</p>
 
-      <div>
-        <p className="text-2xl sm:text-3xl font-extrabold p-6">Recent jobs</p>
+				<div className="flex space-x- md:px-8    items-center gap-3     flex-wrap justify-start   px-3 py-1">
+					{[...Array(5)].map((item: any, index: number) => {
+						return (
+							<Link key={index} href="/JobDetails">
+								<Card />
+							</Link>
+						);
+					})}
+				</div>
+			</div>
 
+<<<<<<< HEAD
         <div className="flex space-x- md:px-8    items-center gap-3     flex-wrap justify-start   px-3 py-1">
           {
             recommendedJobs.map((item: any, index: number) => {
@@ -63,6 +75,25 @@ function Homepage() {
 
 
   )
+=======
+			{/* <div>
+				<p className="text-2xl sm:text-5xl font-extrabold p-6">
+					Recommended jobs
+				</p>
+
+				<div className="flex space-x- md:px-8    items-center gap-3     flex-wrap justify-start   px-3 py-1">
+					{recommendedJobs.map((item: any, index: number) => {
+						return (
+							<Link key={index} href="/JobDetails">
+								<Card />
+							</Link>
+						);
+					})}
+				</div>
+			</div> */}
+		</div>
+	);
+>>>>>>> 433fe84519e19e20d03fed7372119a5e0bd84947
 }
 
 export default Homepage;
