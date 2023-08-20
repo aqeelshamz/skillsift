@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 
 const jobSchema = new mongoose.Schema(
   {
-    companyName: {
+    title: {
       type: String,
       required: true,
     },
-    position: {
+    description: {
       type: String,
       required: true,
     },
@@ -16,6 +16,10 @@ const jobSchema = new mongoose.Schema(
     },
     skillsRequired: {
       type: [String], // Array of strings representing skills
+      required: true,
+    },
+    deadline: {
+      type: String,
       required: true,
     },
     companyId: {

@@ -1,21 +1,21 @@
 import express from "express";
 import Job from "../models/jobModel.js"; // Import your Job model
-import validate from "../utils/userValidate.js";
+import validate, { validateCompany } from "../utils/userValidate.js";
 import User from "../models/userModel.js";
 const router = express.Router();
 
 // Create a new job
-router.post("/create", validate, async (req, res) => {
-  const { companyName, position, salary, skillsRequired } = req.body;
+router.post("/create", validateCompany, async (req, res) => {
+  const { title, description, salary, skillsRequired, deadline, companyId } = req.body;
 
   try {
     const job = new Job({
-      companyName,
-      position,
+      title,
+      description,
       salary,
       skillsRequired,
-      description,
-      companyId: req.user.id,
+      deadline,
+      companyId,
     });
 
     await job.save();
@@ -36,7 +36,7 @@ router.get("/jobs", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 })
-// Get a specific job by ID
+  // Get a specific job by ID
   .get("/jobs/:id", async (req, res) => {
     const jobId = req.params.id;
 
