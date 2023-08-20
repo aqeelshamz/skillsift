@@ -2,7 +2,7 @@ import express from "express";
 import joi from "joi";
 import OpenAI from "openai";
 import { resumeInfoExtractionPrompt } from "../utils/util.js";
-import validate from "../utils/userValidate.js"
+import { validate } from "../utils/userValidate.js"
 const router = express.Router();
 import multer from 'multer';
 import Resume from "../models/resumeModel.js";

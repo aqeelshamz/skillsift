@@ -8,7 +8,6 @@ import morgan from "morgan";
 //* ROUTES
 import userRoutes from "./routes/user.js";
 import resumeRoutes from "./routes/resume.js";
-import companyRoutes from "./routes/company.js";
 import jobRoutes from "./routes/job.js";
 
 //* CONFIGURATIONS
@@ -41,7 +40,6 @@ app.get("/", (req, res) => {
 //* ROUTES
 app.use("/user", userRoutes);
 app.use("/resume", resumeRoutes);
-app.use("/company", companyRoutes);
 app.use("/job", jobRoutes)
 
 

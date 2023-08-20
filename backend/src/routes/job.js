@@ -1,12 +1,12 @@
 import express from "express";
 import Job from "../models/jobModel.js"; // Import your Job model
-import validate, { validateCompany } from "../utils/userValidate.js";
+import { validate, validateCompany } from "../utils/userValidate.js";
 import User from "../models/userModel.js";
 const router = express.Router();
 
 // Create a new job
 router.post("/create", validateCompany, async (req, res) => {
-  const { title, description, salary, skillsRequired, deadline, companyId } = req.body;
+  const { title, description, salary, skillsRequired, deadline } = req.body;
 
   try {
     const job = new Job({
@@ -15,7 +15,7 @@ router.post("/create", validateCompany, async (req, res) => {
       salary,
       skillsRequired,
       deadline,
-      companyId,
+      companyId: req.user._id
     });
 
     await job.save();
@@ -27,10 +27,9 @@ router.post("/create", validateCompany, async (req, res) => {
 });
 
 // Get all jobs
-router.get("/jobs", async (req, res) => {
+router.get("/list", async (req, res) => {
   try {
-    const jobs = await Job.find().populate("user", "name"); // Populate user field with user's name
-    res.json({ jobs });
+    res.json(await Job.find());
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
